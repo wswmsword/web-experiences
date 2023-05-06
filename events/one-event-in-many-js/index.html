@@ -1,0 +1,19 @@
+<body></body>
+
+<script>
+  let max = 10;
+  const id = setInterval(() => {
+    if (max === 0) {
+      clearInterval(id);
+      return;
+    }
+    for(let i = 0; i < 9999; ++ i) {
+      const bb = document.createElement("button");
+      bb.addEventListener("click", console.log);
+      bb.innerHTML = "嗲嗲";
+      document.body.append(bb);
+    }
+    -- max;
+  }, 16);
+  
+</script>

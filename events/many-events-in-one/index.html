@@ -1,0 +1,17 @@
+<body>
+  <button id="btn">嗲嗲</button>
+  <img src="../attack-on-cat.gif" />
+</body>
+<script>
+  const bb = document.getElementById("btn");
+  let max = 1;
+  const timer = setInterval(() => {
+    if (max === 0) clearInterval(timer);
+    for(let i = 0; i < 9999; ++ i) {
+      bb.addEventListener("click", () => {
+        console.log("555");
+      });
+    }
+    -- max;
+  }, 16)
+</script>
