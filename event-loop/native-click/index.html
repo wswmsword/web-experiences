@@ -1,0 +1,16 @@
+<body>
+  <button id="d">嗲嗲</button>
+</body>
+
+<script>
+  const btn = document.getElementById('d');
+  btn.addEventListener("click", function a() {
+    Promise.resolve().then(() => console.log("Micro 1"));
+    console.log("Listener 1");
+  });
+
+  btn.addEventListener("click", function b() {
+    Promise.resolve().then(() => console.log("Micro 2"));
+    console.log("Listener 2");
+  });
+</script>

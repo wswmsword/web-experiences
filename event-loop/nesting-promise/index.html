@@ -1,0 +1,20 @@
+<body>
+
+</body>
+<script>
+
+  new Promise(function a(resolve) {
+    console.log(1);
+    resolve();
+  }).then(function t1() {
+    new Promise(function b(resolve) {
+      console.log(3);
+      resolve();
+    }).then(function t2() {
+      console.log(5);
+    })
+    console.log(4);
+  });
+
+  console.log(2);
+</script>
