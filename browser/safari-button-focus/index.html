@@ -1,0 +1,27 @@
+<div id="container">
+  <button id="btn" tabindex="0">
+    <span id="txt">testst</span>
+  </button>
+  <input id="ipt" />
+</div>
+
+<script>
+  var con = document.getElementById("container");
+  var btn = document.getElementById("btn");
+  var ipt = document.getElementById("ipt");
+  btn.addEventListener("focusin", function() {
+    console.log("focus in ...");
+    console.log(document.activeElement);
+  });
+
+  btn.addEventListener("focusout", function() {
+    console.log("focus out ...");
+    console.log(document.activeElement);
+  });
+
+  btn.addEventListener("mousedown", function(e) {
+    console.log("mouse down ...")
+    btn.focus();
+    e.preventDefault()
+  });
+</script>
