@@ -1,0 +1,34 @@
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .wrapper {
+    width: 600px;
+    height: 100%;
+    display: flex;
+  }
+  .side {
+    border: 1px solid salmon;
+    width: 120px;
+    box-sizing: border-box;
+  }
+  .content {
+    border: 1px solid slateblue;
+    flex: auto;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .very-wide {
+    width: 1000px;
+    height: 12px;
+    border: 1px solid black;
+  }
+</style>
+
+<body>
+  <div class="wrapper">
+    <div class="side"></div>
+    <div class="content"><div class="very-wide"></div></div>
+  </div>
+</body>
