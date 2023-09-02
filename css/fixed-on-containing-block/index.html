@@ -1,0 +1,49 @@
+<style>
+  .containing_block {
+    width: 300px;
+    height: 250px;
+    margin: 100px;
+    transform: translateZ(0);
+    border: 3px solid salmon;
+  }
+
+  .necessary_viewport {
+    width: 100%;
+    height: 100%;
+    border: 5px solid sienna;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+
+  .centered {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .btn-3 {
+    width: 50%;
+  }
+</style>
+
+<body>
+  <div class="containing_block">
+    <div class="necessary_viewport">
+
+      <button class="centered">1</button>
+
+      <div>
+        <button class="centered">2</button>
+        <hr ><hr ><hr ><hr ><hr ><hr ><hr ><hr >
+        <hr ><hr ><hr ><hr ><hr ><hr ><hr ><hr >
+        <hr ><hr ><hr ><hr ><hr ><hr ><hr ><hr >
+        <hr ><hr ><hr ><hr ><hr ><hr ><hr ><hr >
+        <hr ><hr ><hr ><hr ><hr ><hr ><hr ><hr >
+      </div>
+
+    </div>
+    <button class="centered btn-3">3</button>
+  </div>
+  <button class="centered">4</button>
+</body>
