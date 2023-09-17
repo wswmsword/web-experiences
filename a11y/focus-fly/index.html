@@ -1,0 +1,136 @@
+<style>
+button:focus {
+  background: black;
+  color: white;
+}
+</style>
+
+<body>
+  <div id="wrapper">
+    <button id="entry_1">entry(outer)</button>
+    <div id="list_1">
+      <button id="item_1_1">item 1(entry)</button>
+      <div id="list_1_1">
+        <button id="item_1_1_1">item 1.1</button>
+        <button id="item_1_1_2">item 1.2</button>
+      </div>
+      <button id="item_1_2">item 2(entry)</button>
+      <div id="list_1_2">
+        <button id="item_1_2_1">item 2.1</button>
+        <button id="item_1_2_2">item 2.2</button>
+      </div>
+      <button id="item_1_3">item 3(entry)</button>
+      <div id="list_1_3">
+        <button id="item_1_3_1">item 3.1</button>
+        <button id="item_1_3_2">item 3.2</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+
+const path = [];
+
+const construct = {
+  entry_1: {
+    item_1_1: ['item_1_1_1', 'item_1_1_2'],
+    item_1_2: ['item_1_2_1', 'item_1_2_2'],
+    item_1_3: ['item_1_3_1', 'item_1_3_2']
+  }
+}
+
+const outerEntry = document.getElementById("entry_1");
+const item11 = document.getElementById("item_1_1");
+outerEntry.addEventListener("click", function() {
+  // 推入路径
+  path.push("entry_1", "item_1_1");
+  item11.focus();
+});
+
+const rootList = document.getElementById("list_1");
+rootList.addEventListener("keydown", function(e) {
+  // 进入列表
+  if (e.key === "Enter") {
+    /** 当前位置 */
+    const curLoc = path.at(-1);
+    const [nextInfo] = findObjTarget(construct, curLoc);
+    if (nextInfo != null) {
+      if (Array.isArray(nextInfo)) {
+        const nextFocus = nextInfo[0];
+        document.getElementById(nextFocus).focus();
+      } else if (isObj(nextInfo)) {
+        const nextFocus = (Object.keys(nextInfo))[0];
+        path.push(nextFocus);
+        document.getElementById(nextFocus).focus();
+      }
+    }
+  }
+  // 退出列表
+  if (e.key === "Escape") {
+    const curFocusId = document.activeElement?.id;
+    const isEntryFocus = curFocusId === path.at(-1);
+    // 如果当前焦点是入口，则先 pop
+    if (isEntryFocus) path.pop();
+    const nextLoc = path.at(-1);
+    if (nextLoc != null) {
+      document.getElementById(nextLoc).focus();
+    }
+  }
+  // 导航
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const curFocusId = document.activeElement.id;
+    if (path[0] !== "entry_1")
+      path.unshift('entry_1');
+    // 后退
+    if (e.shiftKey) {
+      const [subInfo, bros] = findObjTarget(construct, curFocusId);
+      const len = bros.length;
+      const idx = bros.findIndex(v => v === curFocusId);
+      const nextId = bros[(len + idx - 1) % len];
+      if (subInfo != null) {
+        path.pop();
+        path.push(nextId)
+      }
+      document.getElementById(nextId).focus();
+    } else { // 前进
+      const [subInfo, bros] = findObjTarget(construct, curFocusId);
+      const len = bros.length;
+      const idx = bros.findIndex(v => v === curFocusId);
+      const nextId = bros[(idx + 1) % len];
+      if (subInfo != null) {
+        path.pop();
+        path.push(nextId)
+      }
+      document.getElementById(nextId).focus();
+    }
+  }
+});
+
+/** 深搜 **/
+function findObjTarget(obj, target) {
+  if (obj == null) return null;
+  if (Array.isArray(obj))
+    if (obj.includes(target)) return [null, obj];
+    else return null;
+  for (const prop in obj) {
+    if (prop === target) {
+      return [obj[prop], Object.keys(obj)]; // [prop 的子元素，prop 的同级元素]
+    }
+    else {
+      const found = findObjTarget(obj[prop], target);
+      if (found != null) return found;
+    }
+  }
+}
+
+function isObj(obj) {
+  return objToStr(obj) === "[object Object]";
+}
+
+function objToStr(obj) {
+  return Object.prototype.toString.call(obj);
+}
+
+</script>
