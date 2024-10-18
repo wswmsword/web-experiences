@@ -1,6 +1,4 @@
 import {createContext, memo, useContext, useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 const Context = createContext(0);
@@ -32,10 +30,16 @@ function A() {
   return <div>A Comp</div>;
 }
 
+/** 中间层 B */
 function B() {
-  const Context_ = useContext(Context);
   console.log("render B....");
-  return <>B Comp, Context Value: {Context_}</>;
+  return <div>B...<C /></div>
+}
+
+function C() {
+  const Context_ = useContext(Context);
+  console.log("render C....");
+  return <>C Comp, Context Value: {Context_}</>;
 }
 
 export default App

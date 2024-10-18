@@ -4,9 +4,7 @@ import App from './App.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <App propComp={<PropComp />} renderProp={renderProp} />
-  </React.StrictMode>,
 )
 
 function PropComp() {
