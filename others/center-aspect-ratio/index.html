@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Center Aspect Ratio</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #container {
+      width: 80%;
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #eee;
+      overflow: hidden;
+      border: 1px solid black;
+      display: flex;
+    }
+
+    .aspect-box {
+      aspect-ratio: 9 / 18;
+      width: 100%;
+      min-width: 0;
+      /* height: 100%; */
+      max-height: 100%;
+      min-height: 0;
+      background: lightblue;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .t {
+      flex-grow: 1;
+      background-color: lightcoral;
+    }
+    .img {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      background-color: bisque;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div class="aspect-box">
+      <div class="t"></div>
+      <div class="img"></div>
+    </div>
+    <div class="aspect-box">
+      <div class="t"></div>
+      <div class="img"></div>
+    </div>
+    <div class="aspect-box">
+      <div class="t"></div>
+      <div class="img"></div>
+    </div>
+    <div class="aspect-box">
+      <div class="t"></div>
+      <div class="img"></div>
+    </div>
+  </div>
+</body>
+
+<script>
+const container = document.getElementById('container');
+const aspectBoxes = document.querySelectorAll('.aspect-box');
+window.addEventListener('resize', () => {
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
+  const aspectRatio = 9 / 18; // Change this to your desired aspect ratio
+
+  // Calculate the new width and height based on the aspect ratio
+  let newWidth, newHeight;
+  if (containerWidth / containerHeight > 2) {
+    aspectBoxes.forEach((box) => {
+      box.style.width = 'auto';
+      box.style.height = '100%';
+    });
+  } else {
+    aspectBoxes.forEach((box) => {
+      box.style.width = '100%';
+      box.style.height = 'auto';
+    });
+  }
+});
+</script>
+
+</html>
